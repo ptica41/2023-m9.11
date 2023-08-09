@@ -50,21 +50,6 @@ let personGenerator = {
             "id_10": "Мария"
         }
     }`,
-    middleNameJson: `{
-        "count": 10,
-        "list": {     
-            "id_1": "Викторович",
-            "id_2": "Олегович",
-            "id_3": "Андреевич",
-            "id_4": "Игоревич",
-            "id_5": "Максимович",
-            "id_6": "Николаевич",
-            "id_7": "Артемович",
-            "id_8": "Кириллович",
-            "id_9": "Юрьевич",
-            "id_10": "Евгеньевич"
-        }
-    }`,
     professionMaleJson: `{
         "count": 5,
         "list": {
@@ -131,13 +116,31 @@ let personGenerator = {
         if (Math.random() < 0.5) {
             this.person.surname = this.randomValue(this.surnameJson);
             this.person.firstName = this.randomValue(this.firstNameMaleJson);
-            this.person.middleName = this.randomValue(this.middleNameJson);
+            this.person.MiddleName = this.randomValue(this.firstNameMaleJson);
+            if (this.person.MiddleName === 'Дмитрий' || this.person.MiddleName === 'Андрей') {
+                this.person.middleName = this.person.MiddleName.slice(0, -1) + 'евич';
+            } else if (this.person.MiddleName === 'Никита') {
+                this.person.middleName = this.person.MiddleName.slice(0, -1) + 'ович';
+            } else if (this.person.MiddleName === 'Михаил') {
+                this.person.middleName = 'Михайлович';
+            } else {
+                this.person.middleName = this.person.MiddleName + 'ович';
+            }
             this.person.gender = this.GENDER_MALE;
             this.person.profession = this.randomValue(this.professionMaleJson);
         } else {
-            this.person.surname = this.randomValue(this.surnameJson) + 'a';;
+            this.person.surname = this.randomValue(this.surnameJson) + 'a';
             this.person.firstName = this.randomValue(this.firstNameFemaleJson);
-            this.person.middleName = this.randomValue(this.middleNameJson).slice(0, -2) + 'нa';
+            this.person.MiddleName = this.randomValue(this.firstNameMaleJson);
+            if (this.person.MiddleName === 'Дмитрий' || this.person.MiddleName === 'Андрей') {
+                this.person.middleName = this.person.MiddleName.slice(0, -1) + 'евна';
+            } else if (this.person.MiddleName === 'Никита') {
+                this.person.middleName = this.person.MiddleName.slice(0, -1) + 'овна';
+            } else if (this.person.MiddleName === 'Михаил') {
+                this.person.middleName = 'Михайловна';
+            } else {
+                this.person.middleName = this.person.MiddleName + 'овна';
+            }
             this.person.gender = this.GENDER_FEMALE;
             this.person.profession = this.randomValue(this.professionFemaleJson);
         };
